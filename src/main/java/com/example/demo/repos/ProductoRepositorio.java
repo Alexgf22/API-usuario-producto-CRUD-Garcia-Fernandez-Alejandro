@@ -9,5 +9,5 @@ import java.util.List;
 public interface ProductoRepositorio extends JpaRepository<Producto, Long> {
     List<Producto> findByUsuarioId(Long usuarioId);
 
-    Producto buscarPorNombreYprecio(String name, BigDecimal price);
+    //Producto buscarPorNombreYprecio(String name, BigDecimal price);
 }

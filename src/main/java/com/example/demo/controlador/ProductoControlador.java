@@ -46,11 +46,11 @@ public class ProductoControlador {
     @PostMapping("/")
     public ResponseEntity<?> createProducto(@Valid @RequestBody Producto producto) {
         // Realizar la verificación de existencia de producto
-        Producto existingProducto = productoRepositorio.buscarPorNombreYprecio(producto.getName(), producto.getPrice());
+        //Producto existingProducto = productoRepositorio.buscarPorNombreYprecio(producto.getName(), producto.getPrice());
 
-        if (existingProducto != null) {
+        /*if (existingProducto != null) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("El producto ya existe");
-        }
+        }*/
 
 
         // Si no existe, crea el nuevo producto
