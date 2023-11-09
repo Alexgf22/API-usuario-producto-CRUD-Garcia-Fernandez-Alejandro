@@ -29,24 +29,31 @@ public class ProductoControlador {
     }
 
     @GetMapping("/{id}")
-    Producto getProductoById(@PathVariable Long id)
+    public ResponseEntity<Producto> getProductoById(@PathVariable Long id)
     {
-        return productoRepositorio.findById(id).orElse(null);
+        Producto producto = productoRepositorio.findById(id).orElse(null);
+        if (producto == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(producto);
+        }
     }
     @PostMapping("/")
-    public Producto createProducto(@Valid @RequestBody Producto producto) {
-        return productoRepositorio.save(producto);
+    public ResponseEntity<Producto> createProducto(@Valid @RequestBody Producto producto) {
+        Producto createdProducto = productoRepositorio.save(producto);
+        return ResponseEntity.ok(createdProducto);
     }
 
     @PutMapping("/{id}")
-    public Producto updateProducto(@PathVariable Long id, @Valid @RequestBody Producto producto) {
+    public ResponseEntity<Producto> updateProducto(@PathVariable Long id, @Valid @RequestBody Producto producto) {
         return productoRepositorio.findById(id)
                 .map(existingProducto -> {
                     existingProducto.setName(producto.getName());
                     existingProducto.setPrice(producto.getPrice());
-                    return productoRepositorio.save(existingProducto);
+                    Producto updatedProducto = productoRepositorio.save(existingProducto);
+                    return ResponseEntity.ok(updatedProducto);
                 })
-                .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id " + id));
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
@@ -56,7 +63,7 @@ public class ProductoControlador {
                     productoRepositorio.delete(producto);
                     return ResponseEntity.ok().build();
                 })
-                .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id " + id));
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // Crear productos asociados a cliente

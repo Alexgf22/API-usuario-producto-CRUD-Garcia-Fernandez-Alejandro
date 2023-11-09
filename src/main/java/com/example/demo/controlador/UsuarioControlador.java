@@ -28,19 +28,21 @@ public class UsuarioControlador {
 
     // Add methods for POST, PUT, DELETE...
     @PostMapping("/")
-    public Usuario createUsuario(@Valid @RequestBody Usuario usuario) {
-        return usuarioRepositorio.save(usuario);
+    public ResponseEntity<Usuario> createUsuario(@Valid @RequestBody Usuario usuario) {
+        Usuario createdUsuario = usuarioRepositorio.save(usuario);
+        return ResponseEntity.ok(createdUsuario);
     }
 
     @PutMapping("/{id}")
-    public Usuario updateUsuario(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
         return usuarioRepositorio.findById(id)
                 .map(existingUsuario -> {
                     existingUsuario.setName(usuario.getName());
                     existingUsuario.setEmail(usuario.getEmail());
-                    return usuarioRepositorio.save(existingUsuario);
+                    Usuario updatedUsuario = usuarioRepositorio.save(existingUsuario);
+                    return ResponseEntity.ok(updatedUsuario);
                 })
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado  con id " + id));
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
@@ -50,6 +52,8 @@ public class UsuarioControlador {
                     usuarioRepositorio.delete(usuario);
                     return ResponseEntity.ok().build();
                 })
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario not found with id " + id));
+                .orElse(ResponseEntity.notFound().build());
     }
+
+
 }
