@@ -1,12 +1,11 @@
 package com.example.demo.controlador;
 
+import com.example.demo.dto.UsuarioDTO;
+import com.example.demo.error.UserNotFoundException;
 import com.example.demo.modelo.Usuario;
 import com.example.demo.repos.UsuarioRepositorio;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.dto.UsuarioDTO;
-
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class UsuarioControlador {
                     Usuario updatedUsuario = usuarioRepositorio.save(existingUsuario);
                     return ResponseEntity.ok(new UsuarioDTO(updatedUsuario));
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado con id " + id));
     }
 
     @DeleteMapping("/{id}")
@@ -58,7 +57,7 @@ public class UsuarioControlador {
                     usuarioRepositorio.delete(usuario);
                     return ResponseEntity.ok().build();
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado con id " + id));
     }
 
 
