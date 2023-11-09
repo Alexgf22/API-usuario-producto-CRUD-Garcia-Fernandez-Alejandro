@@ -5,9 +5,11 @@ import com.example.demo.repos.UsuarioRepositorio;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.dto.UsuarioDTO;
 
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -22,25 +24,29 @@ public class UsuarioControlador {
     }
 
     @GetMapping("/")
-    public List<Usuario> getUsuarios() {
-        return usuarioRepositorio.findAll();
+    public List<UsuarioDTO> getUsuarios() {
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        List<UsuarioDTO> usuarioDTOs = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            usuarioDTOs.add(new UsuarioDTO(usuario));
+        }
+        return usuarioDTOs;
     }
 
-    // Add methods for POST, PUT, DELETE...
     @PostMapping("/")
-    public ResponseEntity<Usuario> createUsuario(@Valid @RequestBody Usuario usuario) {
+    public ResponseEntity<UsuarioDTO> createUsuario(@Valid @RequestBody Usuario usuario) {
         Usuario createdUsuario = usuarioRepositorio.save(usuario);
-        return ResponseEntity.ok(createdUsuario);
+        return ResponseEntity.ok(new UsuarioDTO(createdUsuario));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
+    public ResponseEntity<UsuarioDTO> updateUsuario(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
         return usuarioRepositorio.findById(id)
                 .map(existingUsuario -> {
                     existingUsuario.setName(usuario.getName());
                     existingUsuario.setEmail(usuario.getEmail());
                     Usuario updatedUsuario = usuarioRepositorio.save(existingUsuario);
-                    return ResponseEntity.ok(updatedUsuario);
+                    return ResponseEntity.ok(new UsuarioDTO(updatedUsuario));
                 })
                 .orElse(ResponseEntity.notFound().build());
     }

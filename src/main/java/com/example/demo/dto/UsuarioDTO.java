@@ -20,6 +20,13 @@ public class UsuarioDTO {
 
     List<Long> productos = new ArrayList<>();
 
+    /**
+     * Constructor que selecciona un objeto Usuario y crea un UsuarioDTO a partir de él.
+     * Después copia el id, el nombre y el email del usuario al DTO.
+     * Luego, recorre la lista de productos del usuario y añade el id de cada
+     * producto a la lista de productos del DTO.
+     * @param usuario
+     */
     public UsuarioDTO(Usuario usuario) {
         id = usuario.getId();
         name = usuario.getName();
