@@ -31,6 +31,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
-    // Aquí puedes agregar más manejadores de excepciones según sea necesario
-    // Por ejemplo, podrías tener un manejador para NullPointerExceptions, otro para IllegalArgumentExceptions, etc.
+    @ExceptionHandler(value = {NullPointerException.class})
+    public ResponseEntity<Object> handleNullPointerException(NullPointerException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 }
+
