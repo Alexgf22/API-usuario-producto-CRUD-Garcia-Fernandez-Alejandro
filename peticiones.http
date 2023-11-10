@@ -1,3 +1,5 @@
+### Pruebas realizadas
+
 ### Peticiones Producto
 
 ### Funciona: Obtener todos los productos
@@ -41,8 +43,8 @@ POST http://localhost:8080/api/producto/2/productos
 
 Content-Type: application/json
 {
-    "name": "Ordenador gaming",
-    "price": 999.00
+    "name": "Ordenador sobremesa",
+    "price": 899.00
 }
 
 
@@ -52,8 +54,8 @@ PUT http://localhost:8080/api/producto/4/productos/7
 
 Content-Type: application/json
 {
-    "name": "Portatil ultrabook",
-    "price": 799.00
+    "name": "Movil iphone",
+    "price": 999.00
 }
 
 
@@ -67,17 +69,30 @@ GET http://localhost:8080/api/producto/usuario/4
 ### Peticiones Usuario
 
 
-###
-GET http://localhost:8080/api/usuario
+### Funciona: Se obtiene todos los usuarios con los ids que tiene enlazado cada id de usuario
+GET http://localhost:8080/api/usuario/
 
 
-###
-POST http://localhost:8080/api/usuario
+### Funciona: Creación de nuevo usuario
+POST http://localhost:8080/api/usuario/
+
+Content-Type: application/json
+{
+  "name": "Bill Gates",
+  "email": "billy32@gmail.com"
+}
 
 
-###
-PUT http://localhost:8080/api/usuario/{{id}}
+
+### Funciona: Actualizo los datos del usuario con el id '5'
+PUT http://localhost:8080/api/usuario/5
+
+Content-Type: application/json
+{
+  "name": "Jeff Bezos",
+  "email": "jefry44@gmail.com"
+}
 
 
-###
-DELETE http://localhost:8080/api/usuario/{{id}}
+### Funciona: Elimino el usuario con el id '4'
+DELETE http://localhost:8080/api/usuario/4

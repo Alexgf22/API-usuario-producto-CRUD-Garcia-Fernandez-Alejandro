@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "Producto 1",
+    "price": 100.00,
+    "usuarioId": 1
+  },
+  {
+    "id": 2,
+    "name": "Nuevo producto 2",
+    "price": 220.00,
+    "usuarioId": 1
+  },
+  {
+    "id": 4,
+    "name": "Producto 4",
+    "price": 400.00,
+    "usuarioId": 3
+  },
+  {
+    "id": 5,
+    "name": "Nuevo producto 5",
+    "price": 420.00,
+    "usuarioId": 3
+  },
+  {
+    "id": 8,
+    "name": "Producto 8",
+    "price": 800.00,
+    "usuarioId": 5
+  },
+  {
+    "id": 52,
+    "name": "Ordenador gaming",
+    "price": 999.00,
+    "usuarioId": 2
+  },
+  {
+    "id": 102,
+    "name": "Cartera",
+    "price": 39.99,
+    "usuarioId": null
+  },
+  {
+    "id": 152,
+    "name": "Mochila",
+    "price": 29.99,
+    "usuarioId": null
+  },
+  {
+    "id": 202,
+    "name": "Botella",
+    "price": 19.99,
+    "usuarioId": null
+  },
+  {
+    "id": 203,
+    "name": "Sudadera",
+    "price": 49.99,
+    "usuarioId": null
+  },
+  {
+    "id": 204,
+    "name": "Ordenador sobremesa",
+    "price": 899.00,
+    "usuarioId": 2
+  }
+]

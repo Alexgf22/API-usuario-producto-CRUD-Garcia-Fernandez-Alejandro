@@ -1,0 +1,7 @@
+[
+  {"id":1,"name":"Usuario 1","email":"usuario1@email.com","productos":[1,2]},
+  {"id":2,"name":"Usuario 2","email":"usuario2@email.com","productos":[52,204]},
+  {"id":3,"name":"Usuario 3","email":"usuario3@email.com","productos":[4,5]},
+  {"id":5,"name":"Jeff Bezos","email":"jefry44@gmail.com","productos":[8]},
+  {"id":52,"name":"Elon Musk","email":"elon12@gmail.com","productos":[]},
+  {"id":102,"name":"Bill Gates","email":"billy32@gmail.com","productos":[]}]
