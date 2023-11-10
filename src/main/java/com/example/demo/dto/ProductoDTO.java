@@ -1,6 +1,8 @@
 package com.example.demo.dto;
 
 import com.example.demo.modelo.Producto;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +13,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 public class ProductoDTO {
+
     Long id;
     String name;
     BigDecimal price;
@@ -27,6 +30,6 @@ public class ProductoDTO {
         id = producto.getId();
         name = producto.getName();
         price = producto.getPrice();
-        usuarioId = producto.getUsuario().getId();
+        usuarioId = (producto.getUsuario() != null) ? producto.getUsuario().getId() : null;
     }
 }

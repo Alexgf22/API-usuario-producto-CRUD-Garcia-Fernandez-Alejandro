@@ -1,0 +1,83 @@
+### Peticiones Producto
+
+### Funciona: Obtener todos los productos
+GET http://localhost:8080/api/producto/
+
+
+### Funciona: Obtenemos el producto con id '1'
+GET http://localhost:8080/api/producto/1
+
+
+
+### Funciona: Creo un nuevo producto
+POST http://localhost:8080/api/producto/
+
+Content-Type: application/json
+{
+  "name": "Botella",
+  "price": 19.99
+}
+
+
+
+### Funciona: Actualizamos nombre y precio del producto con id '2'
+PUT http://localhost:8080/api/producto/2
+
+Content-Type: application/json
+{
+    "name": "Nuevo producto 2",
+    "price": 220.00
+}
+
+
+
+### Funciona: Le pasamos el id del producto que queremos eliminar ('3')
+DELETE http://localhost:8080/api/producto/3
+
+
+
+### Funciona: Creamos un nuevo producto y lo enlazamos al usuario con id '2'
+POST http://localhost:8080/api/producto/2/productos
+
+Content-Type: application/json
+{
+    "name": "Ordenador gaming",
+    "price": 999.00
+}
+
+
+### Funciona: Al producto con id '7' asociado al usuario con id '4'
+### lo actualizamos con los valores que le pasamos en formato json
+PUT http://localhost:8080/api/producto/4/productos/7
+
+Content-Type: application/json
+{
+    "name": "Portatil ultrabook",
+    "price": 799.00
+}
+
+
+
+### Funciona: Le pasamos el id del usuario del cual queremos obtener
+### todos los productos que estén enlazados a dicho id
+GET http://localhost:8080/api/producto/usuario/4
+
+
+
+### Peticiones Usuario
+
+
+###
+GET http://localhost:8080/api/usuario
+
+
+###
+POST http://localhost:8080/api/usuario
+
+
+###
+PUT http://localhost:8080/api/usuario/{{id}}
+
+
+###
+DELETE http://localhost:8080/api/usuario/{{id}}

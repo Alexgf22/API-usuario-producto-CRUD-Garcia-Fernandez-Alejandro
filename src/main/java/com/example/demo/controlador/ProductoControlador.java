@@ -1,15 +1,15 @@
 package com.example.demo.controlador;
 
+import com.example.demo.dto.ProductoDTO;
 import com.example.demo.error.ProductNotFoundException;
 import com.example.demo.error.UserNotFoundException;
+import com.example.demo.modelo.Producto;
 import com.example.demo.repos.ProductoRepositorio;
 import com.example.demo.repos.UsuarioRepositorio;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.modelo.Producto;
-import com.example.demo.dto.ProductoDTO;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -45,18 +45,24 @@ public class ProductoControlador {
 
     @PostMapping("/")
     public ResponseEntity<?> createProducto(@Valid @RequestBody Producto producto) {
-        // Realizar la verificación de existencia de producto
-        //Producto existingProducto = productoRepositorio.buscarPorNombreYprecio(producto.getName(), producto.getPrice());
+        try {
+            // Verificar si ya existe un producto con el mismo nombre y precio
+            Producto existingProducto = productoRepositorio.buscarPorNombreYprecio(producto.getName(), producto.getPrice());
 
-        /*if (existingProducto != null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("El producto ya existe");
-        }*/
+            if (existingProducto != null) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("El producto ya existe");
+            }
 
+            // Si no existe, crea el nuevo producto
+            Producto createdProducto = productoRepositorio.save(producto);
+            return ResponseEntity.ok(new ProductoDTO(createdProducto));
 
-        // Si no existe, crea el nuevo producto
-        Producto createdProducto = productoRepositorio.save(producto);
-        return ResponseEntity.ok(new ProductoDTO(createdProducto));
+        } catch (Exception e) {
+            // Manejar otras excepciones
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el producto");
+        }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductoDTO> updateProducto(@PathVariable Long id, @Valid @RequestBody Producto producto) {
